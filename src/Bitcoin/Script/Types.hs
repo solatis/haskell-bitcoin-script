@@ -6,7 +6,6 @@ module Bitcoin.Script.Types
 , opPushData
 ) where
 
-import Control.DeepSeq (NFData, rnf)
 import Control.Monad (liftM2, unless, forM_)
 import Control.Applicative ((<$>))
 
@@ -43,9 +42,6 @@ data Script =
            }
     deriving (Eq, Show, Read)
 
-instance NFData Script where
-    rnf (Script o) = rnf o
-
 instance Binary Script where
     get =
         Script <$> getScriptOps
@@ -73,8 +69,6 @@ data PushDataType
       -- the stack
     | OPDATA4
     deriving (Show, Read, Eq)
-
-instance NFData PushDataType
 
 -- | Data type representing all of the operators allowed inside a 'Script'.
 data ScriptOp
@@ -190,13 +184,6 @@ data ScriptOp
     | OP_INVALIDOPCODE !Word8
 
         deriving (Show, Read, Eq)
-
-
-instance NFData ScriptOp where
-    rnf (OP_PUSHDATA b t) = rnf b `seq` rnf t
-    rnf (OP_INVALIDOPCODE c) = rnf c
-    rnf x = x `seq` ()
-
 
 instance Binary ScriptOp where
 

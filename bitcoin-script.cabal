@@ -27,7 +27,6 @@ library
 
   build-depends:       base                     >= 4.3          && < 5
                      , text
-                     , deepseq
                      , bytestring
                      , base16-bytestring
                      , binary
