@@ -1,0 +1,60 @@
+language: c
+env:
+ - CABALVER=1.22 GHCVER=7.8.4
+ - CABALVER=1.22 GHCVER=7.10.1
+ - CABALVER=1.22 GHCVER=head
+
+matrix:
+  allow_failures:
+   - env: CABALVER=1.22 GHCVER=7.10.1
+   - env: CABALVER=1.22 GHCVER=head
+    
+before_install:
+# Installing cabal and ghc
+ - travis_retry sudo add-apt-repository -y ppa:hvr/ghc
+ - travis_retry sudo apt-get update
+ - travis_retry sudo apt-get install cabal-install-$CABALVER ghc-$GHCVER # see note about happy/alex
+ - export PATH=$HOME/.cabal/bin:/opt/ghc/$GHCVER/bin:/opt/cabal/$CABALVER/bin:$PATH
+ - travis_retry cabal update
+
+ - |
+   if [ $GHCVER = "head" ] || [ ${GHCVER%.*} = "7.8" ] || [ ${GHCVER%.*} = "7.10" ]; then
+     travis_retry sudo apt-get install happy-1.19.4 alex-3.1.3
+     export PATH=/opt/alex/3.1.3/bin:/opt/happy/1.19.4/bin:$PATH
+   else
+     travis_retry sudo apt-get install happy alex
+   fi
+
+ - cabal install hlint 
+
+# Install hpc-coveralls
+ - travis_retry cabal sandbox init
+ - cabal install hpc-coveralls -j --bindir=$HOME/.cabal/bin/ --constraint='aeson >= 0.7'
+ - cabal sandbox delete
+
+install:
+ - cabal --version
+ - echo "$(ghc --version) [$(ghc --print-project-git-commit-id 2> /dev/null || echo '?')]"
+ - travis_retry cabal install --only-dependencies --enable-tests --enable-benchmarks -j
+
+script:
+ - hlint src --ignore="Parse error"
+ - cabal configure --enable-tests --enable-benchmarks --enable-library-coverage
+ - cabal build -j
+ - run-cabal-test --cabal-name=cabal --show-details=always
+ - cabal check
+ - cabal sdist
+ 
+# The following scriptlet checks that the resulting source distribution can be built & installed
+ - export SRC_TGZ=$(cabal info . | awk '{print $2 ".tar.gz";exit}') ;
+   cd dist/;
+   if [ -f "$SRC_TGZ" ]; then
+      cabal install --force-reinstalls "$SRC_TGZ";
+   else
+      echo "expected '$SRC_TGZ' not found";
+      exit 1;
+   fi ;
+   cd ../
+
+after_script:
+ - hpc-coveralls test-suite --exclude-dir=test --display-report
