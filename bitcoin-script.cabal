@@ -23,9 +23,11 @@ library
   default-language:    Haskell2010
 
   exposed-modules:     Bitcoin.Script
+                       Bitcoin.Script.Types 
 
   build-depends:       base                     >= 4.3          && < 5
                      , text
+                     , deepseq
                      , bytestring
                      , base16-bytestring
                      , binary
