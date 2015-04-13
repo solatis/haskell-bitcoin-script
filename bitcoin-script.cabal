@@ -10,7 +10,13 @@ homepage: http://github.com/solatis/haskell-bitcoin-script
 bug-reports: http://github.com/solatis/haskell-bitcoin-script/issues
 stability: experimental
 synopsis: Compilation, manipulation and decompilation of Bitcoin scripts
-description: Provides pure functions to compile, decompile and manipulate Bitcoin scripts
+description:
+   Provides pure functions to compile, decompile and manipulate Bitcoin scripts.
+   This project relies heavily on the Haskoin project for the compiling and
+   decompiling of the script assembly, and continuously merges changes downstream.
+
+   The advantage this library has over Haskoin is that it uses very few
+   dependencies and doesn't rely on external libraries such as LevelDB and snappy.            
                       
 build-type: Simple
 data-files: LICENSE, README.md
@@ -47,8 +53,6 @@ test-suite test-suite
                      , hspec-expectations
 
                      , bytestring
-                     , groom 
-
                      , bitcoin-script
 
 source-repository head
