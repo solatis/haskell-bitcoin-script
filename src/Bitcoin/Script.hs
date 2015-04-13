@@ -1,4 +1,8 @@
-module Bitcoin.Script where
+module Bitcoin.Script ( decode
+                      , encode
+                      , ScriptOp (..)
+                      , Script (..)
+                      , PushDataType (..) ) where
 
 import qualified Data.Binary                 as B
 import qualified Data.ByteString.Base16.Lazy as BS16L

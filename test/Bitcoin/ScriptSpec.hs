@@ -1,7 +1,6 @@
 module Bitcoin.ScriptSpec where
 
-import           Bitcoin.Script             (decode, encode)
-import           Bitcoin.Script.Types
+import           Bitcoin.Script
 
 import qualified Data.ByteString.Lazy.Char8 as BSL8 (pack)
 
