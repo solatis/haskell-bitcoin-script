@@ -44,6 +44,7 @@ test-suite test-suite
 
   build-depends:       base                     >= 4.3          && < 5
                      , hspec
+                     , hspec-expectations
 
                      , bytestring
                      , groom 
