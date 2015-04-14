@@ -6,7 +6,7 @@ license-file: LICENSE
 copyright: (c) 2015 Leon Mergen
 author: Leon Mergen
 maintainer: leon@solatis.com
-homepage: http://github.com/solatis/haskell-bitcoin-script
+homepage: http://www.leonmergen.com/opensource.html
 bug-reports: http://github.com/solatis/haskell-bitcoin-script/issues
 stability: experimental
 synopsis: Compilation, manipulation and decompilation of Bitcoin scripts
