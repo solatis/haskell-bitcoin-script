@@ -1,14 +1,14 @@
-module Bitcoin.Script ( decode
-                      , encode
-                      , ScriptOp (..)
-                      , Script (..)
-                      , PushDataType (..) ) where
+module Network.Bitcoin.Script ( decode
+                              , encode
+                              , ScriptOp (..)
+                              , Script (..)
+                              , PushDataType (..) ) where
 
 import qualified Data.Binary                 as B
 import qualified Data.ByteString.Base16.Lazy as BS16L
 import qualified Data.ByteString.Lazy        as BSL
 
-import           Bitcoin.Script.Types
+import           Network.Bitcoin.Script.Types
 
 -- | Decodes a hex representation of a script into a 'Script' object.
 decode :: BSL.ByteString -> Script

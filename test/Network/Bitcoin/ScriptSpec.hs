@@ -1,11 +1,10 @@
-module Bitcoin.ScriptSpec where
+module Network.Bitcoin.ScriptSpec where
 
-import           Bitcoin.Script
+import           Network.Bitcoin.Script
 
 import qualified Data.ByteString.Lazy.Char8 as BSL8 (pack)
 
 import           Test.Hspec
-import           Test.Hspec.Expectations    (expectationFailure)
 
 spec :: Spec
 spec = do

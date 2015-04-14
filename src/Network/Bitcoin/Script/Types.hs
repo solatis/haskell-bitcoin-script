@@ -1,4 +1,4 @@
-module Bitcoin.Script.Types
+module Network.Bitcoin.Script.Types
 ( ScriptOp(..)
 , Script(..)
 , PushDataType(..)
