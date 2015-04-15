@@ -1,6 +1,6 @@
-module Network.Bitcoin.ScriptSpec where
+module Data.Bitcoin.ScriptSpec where
 
-import           Network.Bitcoin.Script
+import           Data.Bitcoin.Script
 
 import qualified Data.ByteString.Lazy.Char8 as BSL8 (pack)
 
