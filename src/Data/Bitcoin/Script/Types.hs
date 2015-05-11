@@ -38,7 +38,7 @@ import qualified Data.ByteString as BS
 data Script =
     Script {
              -- | List of script operators defining this script
-             scriptOps :: ![ScriptOp]
+             scriptOps :: [ScriptOp]
            }
     deriving (Eq, Show, Read)
 
@@ -73,7 +73,7 @@ data PushDataType
 -- | Data type representing all of the operators allowed inside a 'Script'.
 data ScriptOp
       -- Pushing Data
-    = OP_PUSHDATA !BS.ByteString !PushDataType
+    = OP_PUSHDATA BS.ByteString PushDataType
     | OP_0
     | OP_1NEGATE
     | OP_RESERVED
@@ -181,7 +181,7 @@ data ScriptOp
       -- Other
     | OP_PUBKEYHASH
     | OP_PUBKEY
-    | OP_INVALIDOPCODE !Word8
+    | OP_INVALIDOPCODE Word8
 
         deriving (Show, Read, Eq)
 
